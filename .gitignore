@@ -1,3 +1,9 @@
+# Eclipse Things
+.settings
+.metadata
+*/.project
+*/.classpath
+
 # Compiled class file
 *.class
 
@@ -38,10 +44,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# Eclipse Things
-.settings
-.metadata
 
 # =========================
 # Operating System Files
