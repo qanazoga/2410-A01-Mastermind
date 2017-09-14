@@ -6,14 +6,14 @@ package mastermind;
  */
 public class GameState 
 {
-	final int blackPegs;
-	final int whitePegs;
-	Boolean gameOver = false;
+	public final int blackPegs;
+	public final int whitePegs;
+	public Boolean gameOver = false;
 	
-	public GameState(int b, int w)
+	public GameState(int blackPegs, int whitePegs)
 	{
-		blackPegs = b;
-		whitePegs = w;
+		this.blackPegs = blackPegs;
+		this.whitePegs = whitePegs;
 	}
 	
 	public String toString()
