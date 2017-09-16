@@ -1,6 +1,7 @@
 package mastermindGUI;
 
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,5 +80,14 @@ public class GameStateManager {
 	public void setRows(HBox...rows) {
 		this.allRows = rows;
 		this.currentRow = rows[0];
+	}
+
+	public void removeButton(PinButton pinButton) {
+		HBox parent = (HBox) pinButton.getParent();
+		if (parent.getChildren().size() == 5) { // Remove the checkmark button if it exists.
+			parent.getChildren().remove(4);
+		}
+		parent.getChildren().remove(pinButton);
+		this.placedPins--;
 	}
 }

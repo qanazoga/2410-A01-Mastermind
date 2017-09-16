@@ -28,9 +28,11 @@ public class PinButton extends Button {
 		this.setStyle("-fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: " + color + ";");
 		this.isRowButton = isRowButton;
 		
-		this.setOnMouseClicked(e -> {
+		this.setOnMouseClicked(event -> {
 			if (isRowButton) {
-				//TODO: write this part. The button should destroy itself.
+				if (this.getParent() == gsm.currentRow) {
+					gsm.removeButton(this);	
+				}
 			} else {
 				if (gsm.placedPins < 4) {
 					gsm.currentRow.getChildren().add(new PinButton(color, true, gsm));
