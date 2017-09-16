@@ -74,7 +74,7 @@ public class MastermindGuiMain extends Application {
 		root.setCenter(rowField);
 		root.setBottom(btnBox);
 		
-		rowField.getChildren().addAll(row1,row2,row3,row4,row5,row7,row8,row9,row10);
+		rowField.getChildren().addAll(row1,row2,row3,row4,row5,row6,row7,row8,row9,row10);
 		gsm.setCurrentRow(row10); //TODO: this line is for testing too
 		
 		
