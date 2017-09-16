@@ -50,7 +50,7 @@ public class MastermindGuiMain extends Application {
 		PinButton yellowBtn = new PinButton("yellow", false, gsm);
 		
 		// Rows?
-		// TODO: maybe remove this part? I'm not sure if I like this implementation
+		// TODO: maybe remove this part? I'm not sure if I like this implementation, but it really hates being instantiated has HBox[10].
 		HBox row1 = new HBox();
 		HBox row2 = new HBox();
 		HBox row3 = new HBox();
@@ -61,10 +61,6 @@ public class MastermindGuiMain extends Application {
 		HBox row8 = new HBox();
 		HBox row9 = new HBox();
 		HBox row10 = new HBox();
-		
-		
-		// This is the checkmark icon we'll use for the Confirm button later on
-		Image checkmark = new Image(getClass().getResourceAsStream("/rsc/checkmark.png"));
 		
 		// This is where we're going to hold all of our buttons
 		HBox btnBox = new HBox(); 
