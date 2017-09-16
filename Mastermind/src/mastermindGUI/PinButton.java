@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 public class PinButton extends Button {
 	
 	private String color = "black";
-	private Boolean isRowButton = false;
 	
 	/**
 	 * Constructor.
@@ -26,7 +25,6 @@ public class PinButton extends Button {
 	public PinButton(String color, Boolean isRowButton, GameStateManager gsm) {
 		this.color = color;
 		this.setStyle("-fx-pref-width: 50; -fx-pref-height: 50; -fx-background-color: " + color + ";");
-		this.isRowButton = isRowButton;
 		
 		this.setOnMouseClicked(event -> {
 			if (isRowButton) {

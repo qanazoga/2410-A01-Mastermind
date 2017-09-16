@@ -2,12 +2,7 @@ package mastermindGUI;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -72,8 +67,6 @@ public class MastermindGuiMain extends Application {
 		
 		rowField.getChildren().addAll(row1,row2,row3,row4,row5,row6,row7,row8,row9,row10);
 		gsm.setRows(row1,row2,row3,row4,row5,row6,row7,row8,row9,row10);
-		
-		
 		
 		// The final part of initializing the UI, setting the scene, and showing the stage.
 		stage.setScene(scene);
