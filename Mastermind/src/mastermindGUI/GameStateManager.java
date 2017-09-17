@@ -4,7 +4,9 @@ import java.util.Random;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 /**
  * The Game State Manager for Mastermind.
@@ -76,7 +78,7 @@ public class GameStateManager {
 		Button confirm = new Button();
 		confirm.setPrefSize(50, 50);
 		confirm.setGraphic(new ImageView(checkmark));
-		// Confrim that we can place the confirm button, and then do so.
+		// Confirm that we can place the confirm button, and then do so.
 		if (currentRow.getChildren().size() == 4) {
 			currentRow.getChildren().add(confirm);
 		}
@@ -93,8 +95,9 @@ public class GameStateManager {
 					}
 				}
 			} catch (ArrayIndexOutOfBoundsException e) { // This is the worst possible way to do this.
-				this.gameOver = true;
-				// TODO: Show correct code.
+				if (!this.gameOver) { // This will prevent the game from ending in a loss if we've already won on turn 10.
+					endGame(false); 
+				}
 			}
 		}); 
 	}
@@ -117,7 +120,7 @@ public class GameStateManager {
 	}
 		
 	/**
-	 * Compares a row of pins to the winning combination.
+	 * Compares a row of pins to the Game State Manager's winning combination.
 	 * @param row		The HBox of PinButtons to compare.
 	 * @return			Returns an int[2], blackPins and whitePins.
 	 */
@@ -134,7 +137,6 @@ public class GameStateManager {
 		//System.out.println("Checking for black pins...");
 		for (int i = 0; i < rowClone.length; i++) {
 			if (rowClone[i] == winningClone[i]) {
-				System.out.println("Found a match, advancing black pins.");
 				blackPins++;
 				rowClone[i] = null;
 				winningClone[i] = null;
@@ -152,7 +154,7 @@ public class GameStateManager {
 			}
 		}
 		
-		if (blackPins == 4) this.gameOver = true;
+		if (blackPins == 4) endGame(true);
 
 		int[] result = {blackPins, whitePins};
 		//System.out.printf("Black pins: %d, White pins: %d", blackPins, whitePins);	
@@ -177,7 +179,22 @@ public class GameStateManager {
 		}
 	}
 	
-	public void gameOverEvent() {
+	public void endGame(Boolean win) {
+		this.gameOver = true;
+		BorderPane bp = (BorderPane) currentRow.getParent().getParent();
+		HBox correctCode = new HBox(1);
 		
+		for (int i = 0; i < winningRow.length; i++) {
+			PinButton pin = new PinButton(winningRow[i], true, this);
+			correctCode.getChildren().add(pin);
+		}
+		if (win) {
+			((Stage) bp.getScene().getWindow()).setTitle("Winner!");	
+		} else {
+			((Stage) bp.getScene().getWindow()).setTitle("Better Luck Next Time...");		
+		}
+		bp.setBottom(correctCode);
 	}
+	
+	
 }

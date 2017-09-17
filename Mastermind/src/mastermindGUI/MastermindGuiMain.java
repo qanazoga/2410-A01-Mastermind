@@ -46,19 +46,19 @@ public class MastermindGuiMain extends Application {
 		
 		// Rows?
 		// TODO: maybe remove this part? I'm not sure if I like this implementation, but it really hates being instantiated has HBox[10].
-		HBox row1 = new HBox();
-		HBox row2 = new HBox();
-		HBox row3 = new HBox();
-		HBox row4 = new HBox();
-		HBox row5 = new HBox();
-		HBox row6 = new HBox();
-		HBox row7 = new HBox();
-		HBox row8 = new HBox();
-		HBox row9 = new HBox();
-		HBox row10 = new HBox();
+		HBox row1 = new HBox(1);
+		HBox row2 = new HBox(1);
+		HBox row3 = new HBox(1);
+		HBox row4 = new HBox(1);
+		HBox row5 = new HBox(1);
+		HBox row6 = new HBox(1);
+		HBox row7 = new HBox(1);
+		HBox row8 = new HBox(1);
+		HBox row9 = new HBox(1);
+		HBox row10 = new HBox(1);
 		
 		// This is where we're going to hold all of our buttons
-		HBox btnBox = new HBox(); 
+		HBox btnBox = new HBox(1); 
 		btnBox.getChildren().addAll(whiteBtn, blueBtn, blackBtn, redBtn, greenBtn,yellowBtn);
 			
 		// Put everything in our window root
