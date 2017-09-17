@@ -58,6 +58,9 @@ public class GameStateManager {
 		this.currentRow = rows[0];
 	}
 	
+	/**
+	 * Sets the GameStateManager's winning row to a set of random colors.
+	 */
 	private void generateWinningRow() {
 		String[] colors = {"white", "blue", "black", "red", "green", "yellow"};
 		Random rand = new Random();
@@ -67,8 +70,7 @@ public class GameStateManager {
 		}
 		for (int i = 0; i < this.winningRow.length; i++) {
 			System.out.println(this.winningRow[i] + " ");
-		}
-		
+		}		
 	}
 
 	/**
@@ -121,11 +123,13 @@ public class GameStateManager {
 		
 	/**
 	 * Compares a row of pins to the Game State Manager's winning combination.
+	 * Based on Jack's compare.
+	 * 
 	 * @param row		The HBox of PinButtons to compare.
 	 * @return			Returns an int[2], blackPins and whitePins.
 	 */
 	private int[] compare(HBox row) {
-		String[] rowClone = new String[row.getChildren().size()];
+		String[] rowClone = new String[row.getChildren().size()]; 
 		String[] winningClone = winningRow.clone();
 		int blackPins = 0;
 		int whitePins = 0;
@@ -134,7 +138,7 @@ public class GameStateManager {
 			rowClone[i] = ((PinButton) row.getChildren().get(i)).getColor();
 		}
 		
-		//System.out.println("Checking for black pins...");
+		// This loop checks for black result pins.
 		for (int i = 0; i < rowClone.length; i++) {
 			if (rowClone[i] == winningClone[i]) {
 				blackPins++;
@@ -143,7 +147,7 @@ public class GameStateManager {
 			}
 		}
 		
-		//System.out.println("Checking for white pins...");
+		// This loop checks for white result pins.
 		for (int i = 0; i < rowClone.length; i++) {
 			for (int j = 0; j < rowClone.length; j++) {
 				if (rowClone[i] == winningClone[j] && rowClone[i] != null) {
@@ -157,7 +161,6 @@ public class GameStateManager {
 		if (blackPins == 4) endGame(true);
 
 		int[] result = {blackPins, whitePins};
-		//System.out.printf("Black pins: %d, White pins: %d", blackPins, whitePins);	
 		return result;
 	}
 	
@@ -179,6 +182,12 @@ public class GameStateManager {
 		}
 	}
 	
+	/**
+	 * Ends the game, setting the GameStateManager's gameOver value to True. 
+	 * Also sets the game window's title to reflect whether or not the game was won or lost.
+	 * 
+	 * @param win	Boolean value for whether or not the player has won the game.
+	 */
 	public void endGame(Boolean win) {
 		this.gameOver = true;
 		BorderPane bp = (BorderPane) currentRow.getParent().getParent();
@@ -188,6 +197,17 @@ public class GameStateManager {
 			PinButton pin = new PinButton(winningRow[i], true, this);
 			correctCode.getChildren().add(pin);
 		}
+		
+		/** Look at all this casting, I could be a fisherman!
+		  ,-.
+       O /   `.
+      <\/      `.
+       |        `.
+      / \          `.
+     /  /            `>')3s,
+--------.                 ,'
+       /                 7
+		 */
 		if (win) {
 			((Stage) bp.getScene().getWindow()).setTitle("Winner!");	
 		} else {

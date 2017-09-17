@@ -7,11 +7,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * This is the GUI part of Mastermind GUI.
+ * It initializes and launches the JavaFX application.
+ * 
+ * @author Jerrad Sroufe
+ */
 public class MastermindGuiMain extends Application {
 
 	// Set the Stage.
 	public static Stage stage;
-	
 	private GameStateManager gsm = GameStateManager.getInstance();
 
 	@Override
@@ -22,7 +27,12 @@ public class MastermindGuiMain extends Application {
 	
 	
 	/**
-	 * Here's where we put all our buttons into boxes, all our boxes into panes, etc.
+	 * This is where we build all of the initial parts of our UI.
+	 * Buttons get made, get put into boxes, and shoved around the stage.
+	 * A lot of things are unfortunately hard-coded right now, so look around a bit and test before you mess around here too much.
+	 * (That said, most of what's here is visual, if you want to change how things work, play with the other classes!)
+	 * 
+	 * @param stage		This should be the Stage from {@link #start(Stage)}.
 	 */
 	private void initUI(Stage stage) {		
 		BorderPane root = new BorderPane();
@@ -73,7 +83,11 @@ public class MastermindGuiMain extends Application {
 		stage.show();
 	}
 	
+	/**
+	 * Starts our JavaFX application.
+	 * @param args	Any args given on launch. In this program they are ignored.
+	 */
 	public static void main(String[] args) {
-		launch(args); // Starts our JavaFX application.
+		launch(args); 
 	}
 }
