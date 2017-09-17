@@ -1,15 +1,10 @@
 package mastermindGUI;
 
-
-import javafx.scene.Node;
 import java.util.Random;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import mastermind.Code;
-import mastermind.GameState;
 
 /**
  * The Game State Manager for Mastermind.
@@ -88,8 +83,7 @@ public class GameStateManager {
 		confirm.setOnMouseClicked(event -> {
 			this.removeButton(null); // Delete the button on click.
 			this.placedPins = 0;	// Reset the placed pin counter.
-			// TODO: Show pin output.
-			compare(currentRow);
+			placeResultPins(compare(currentRow));			
 			// Move to the next row.
 			try {
 				for (int i = 0; i < allRows.length; i++) {
@@ -122,9 +116,14 @@ public class GameStateManager {
 		this.placedPins--;
 	}
 		
-	private void compare(HBox row) {
+	/**
+	 * Compares a row of pins to the winning combination.
+	 * @param row		The HBox of PinButtons to compare.
+	 * @return			Returns an int[2], blackPins and whitePins.
+	 */
+	private int[] compare(HBox row) {
 		String[] rowClone = new String[row.getChildren().size()];
-		String[] winningClone = winningRow;
+		String[] winningClone = winningRow.clone();
 		int blackPins = 0;
 		int whitePins = 0;
 		
@@ -132,26 +131,53 @@ public class GameStateManager {
 			rowClone[i] = ((PinButton) row.getChildren().get(i)).getColor();
 		}
 		
-		System.out.println("Checking for black pins...");
+		//System.out.println("Checking for black pins...");
 		for (int i = 0; i < rowClone.length; i++) {
 			if (rowClone[i] == winningClone[i]) {
 				System.out.println("Found a match, advancing black pins.");
 				blackPins++;
 				rowClone[i] = null;
-				rowClone[i] = null;
+				winningClone[i] = null;
 			}
 		}
 		
-		System.out.println("Checking for white pins...");
+		//System.out.println("Checking for white pins...");
 		for (int i = 0; i < rowClone.length; i++) {
 			for (int j = 0; j < rowClone.length; j++) {
 				if (rowClone[i] == winningClone[j] && rowClone[i] != null) {
-					whitePins++;
-					rowClone[i] = null;					
+					whitePins++;		
+					rowClone[i] = null;
+					winningClone[j] = null;
 				}
 			}
 		}
 		
-		System.out.printf("Black pins: %d, White pins: %d", blackPins, whitePins);	
+		if (blackPins == 4) this.gameOver = true;
+
+		int[] result = {blackPins, whitePins};
+		//System.out.printf("Black pins: %d, White pins: %d", blackPins, whitePins);	
+		return result;
+	}
+	
+	/**
+	 * Meant to be used in conjunction with {@link #compare(HBox)}.
+	 * pop in the result from that.
+	 * @param result	int[2] to be the Black and White pins.
+	 */
+	private void placeResultPins(int[] result) {
+		for (int i = 0; i < result[0]; i++) {
+			Button pin = new Button();
+			pin.setStyle("-fx-background-Color: Black;");
+			currentRow.getChildren().add(pin);
+		}
+		for (int i = 0; i < result[1]; i++) {
+			Button pin = new Button();
+			pin.setStyle("-fx-background-Color: White;");
+			currentRow.getChildren().add(pin);
+		}
+	}
+	
+	public void gameOverEvent() {
+		
 	}
 }
